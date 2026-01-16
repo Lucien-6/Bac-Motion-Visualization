@@ -1,0 +1,104 @@
+{
+  "global": {
+    "original_fps": 1.0,
+    "um_per_pixel": 0.068,
+    "output_fps": 30.0
+  },
+  "mask": {
+    "enabled": true,
+    "opacity": 0.25
+  },
+  "contour": {
+    "enabled": true,
+    "thickness": 2
+  },
+  "centroid": {
+    "enabled": true,
+    "marker_shape": "circle",
+    "marker_size": 5
+  },
+  "ellipse_axes": {
+    "show_major_axis": true,
+    "show_minor_axis": true,
+    "major_thickness": 1,
+    "major_color": "white",
+    "minor_thickness": 1,
+    "minor_color": "white"
+  },
+  "trajectory": {
+    "enabled": true,
+    "mode": "full",
+    "delay_time": 30.0,
+    "thickness": 2,
+    "color_mode": "velocity"
+  },
+  "time_label": {
+    "enabled": true,
+    "unit": "s",
+    "font_family": "Arial",
+    "font_size": 32,
+    "font_bold": true,
+    "color": "white",
+    "position": [
+      0.02,
+      0.02
+    ]
+  },
+  "scale_bar": {
+    "enabled": true,
+    "thickness": 10,
+    "length_um": 5.0,
+    "bar_color": "white",
+    "text_enabled": true,
+    "text_position": "below",
+    "text_gap": 5,
+    "font_family": "Arial",
+    "font_size": 24,
+    "font_bold": true,
+    "text_color": "white",
+    "position": [
+      0.85,
+      0.92
+    ]
+  },
+  "speed_label": {
+    "enabled": true,
+    "font_family": "Arial",
+    "font_size": 32,
+    "font_bold": true,
+    "color": "white",
+    "position": [
+      0.02,
+      0.92
+    ]
+  },
+  "colorbar": {
+    "enabled": true,
+    "colormap": "viridis",
+    "bar_height": 800,
+    "bar_width": 40,
+    "title": "Speed (μm/s)",
+    "title_font_family": "Arial",
+    "title_font_size": 24,
+    "title_font_bold": true,
+    "title_color": "black",
+    "title_position": "right",
+    "title_gap": 5,
+    "vmin": 0.02,
+    "vmax": 2.07,
+    "tick_interval": 0.41,
+    "tick_font_family": "Arial",
+    "tick_font_size": 18,
+    "tick_font_bold": true,
+    "tick_color": "black",
+    "position": [
+      1.02,
+      0.1
+    ]
+  },
+  "output": {
+    "video_format": "mp4",
+    "image_prefix": "frame_",
+    "subfolder_name": "frames"
+  }
+}

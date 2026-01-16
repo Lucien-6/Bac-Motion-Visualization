@@ -1,0 +1,24 @@
+# Motion Visualization - Dependencies
+# Python 3.10+
+
+# GUI Framework
+PyQt6>=6.4.0
+
+# Image Processing
+opencv-python>=4.8.0
+numpy>=1.24.0
+scipy>=1.10.0
+Pillow>=10.0.0
+
+# Video Export
+imageio[ffmpeg]>=2.31.0
+
+# Colormap Support
+matplotlib>=3.7.0
+
+# Natural Sorting
+natsort>=8.4.0
+
+# Data Processing (for trajectory data)
+pandas>=2.0.0
+openpyxl>=3.1.0
