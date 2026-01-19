@@ -21,9 +21,9 @@
     "show_major_axis": true,
     "show_minor_axis": true,
     "major_thickness": 1,
-    "major_color": "white",
+    "major_color": "red",
     "minor_thickness": 1,
-    "minor_color": "white"
+    "minor_color": "blue"
   },
   "trajectory": {
     "enabled": true,
@@ -74,7 +74,7 @@
   },
   "colorbar": {
     "enabled": true,
-    "colormap": "viridis",
+    "colormap": "jet",
     "bar_height": 800,
     "bar_width": 40,
     "title": "Speed (μm/s)",

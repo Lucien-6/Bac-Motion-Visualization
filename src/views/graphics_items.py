@@ -230,19 +230,18 @@ class DraggableScaleBar(DraggableItem):
         self._font_bold = False
         self._text_color = QColor(255, 255, 255)
         
-        self._width = 120
-        self._height = 40
+        self._update_size()  # Dynamically calculate width and height
     
     def set_bar_length(self, length: int):
         """Set bar length in pixels."""
         self._bar_length = length
-        self._width = length + 20
-        self.prepareGeometryChange()
+        self._update_size()
         self.update()
     
     def set_bar_thickness(self, thickness: int):
         """Set bar thickness."""
         self._bar_thickness = thickness
+        self._update_size()
         self.update()
     
     def set_bar_color(self, color: str):
@@ -253,21 +252,25 @@ class DraggableScaleBar(DraggableItem):
     def set_text(self, text: str):
         """Set scale text."""
         self._text = text
+        self._update_size()
         self.update()
     
     def set_text_enabled(self, enabled: bool):
         """Enable or disable text."""
         self._text_enabled = enabled
+        self._update_size()
         self.update()
     
     def set_text_position(self, position: str):
         """Set text position ('above' or 'below')."""
         self._text_position = position
+        self._update_size()
         self.update()
     
     def set_text_gap(self, gap: int):
         """Set gap between bar and text in pixels."""
         self._text_gap = gap
+        self._update_size()
         self.update()
     
     def set_font(self, family: str, size: int, bold: bool = False):
@@ -276,12 +279,45 @@ class DraggableScaleBar(DraggableItem):
         self._font.setPixelSize(size)  # Use pixel size instead of point size
         self._font_bold = bold
         self._font.setBold(bold)
+        self._update_size()
         self.update()
     
     def set_text_color(self, color: str):
         """Set text color by name."""
         self._text_color = COLOR_MAP.get(color, QColor(255, 255, 255))
         self.update()
+    
+    def _update_size(self):
+        """Update bounding rect based on bar and text dimensions."""
+        from PyQt6.QtGui import QFontMetrics
+        
+        # Calculate width: max of bar length and text width
+        bar_with_margin = self._bar_length + 20  # 10px left + 10px right
+        
+        if self._text_enabled:
+            fm = QFontMetrics(self._font)
+            text_width = fm.horizontalAdvance(self._text)
+            text_with_margin = text_width + 20  # 10px left + 10px right
+            self._width = max(bar_with_margin, text_with_margin)
+            
+            # Calculate height based on text position
+            text_height = fm.height()
+            
+            if self._text_position == "below":
+                # Bar at top, text below
+                # 8 (top margin) + bar_thickness + text_gap + text_height + 2 (bottom margin)
+                self._height = 8 + self._bar_thickness + self._text_gap + text_height + 2
+            else:
+                # Text at top, bar below
+                # 2 (top margin) + text_height + text_gap + bar_thickness + 2 (bottom margin)
+                self._height = 2 + text_height + self._text_gap + self._bar_thickness + 2
+        else:
+            # No text, just bar
+            self._width = bar_with_margin
+            # 8 (top margin) + bar_thickness + 8 (bottom margin)
+            self._height = 8 + self._bar_thickness + 8
+        
+        self.prepareGeometryChange()
     
     def boundingRect(self) -> QRectF:
         """Return bounding rectangle."""
