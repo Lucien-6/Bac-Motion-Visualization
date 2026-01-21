@@ -36,7 +36,7 @@ def main():
     app = QApplication(sys.argv)
     app.setApplicationName("Bac-Motion Visualization")
     app.setOrganizationName("Lucien")
-    app.setApplicationVersion("1.0.1")
+    app.setApplicationVersion("1.1.0")
     app.setWindowIcon(get_app_icon())
     
     controller = MainController()

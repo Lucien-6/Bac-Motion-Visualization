@@ -126,6 +126,9 @@ class ColorbarConfig:
     tick_font_size: int = 12
     tick_font_bold: bool = False
     tick_color: Literal['white', 'black', 'red', 'blue', 'green', 'yellow'] = 'black'
+    border_thickness: int = 1
+    tick_thickness: int = 1
+    tick_length: int = 5
     position: list[float] = field(default_factory=lambda: [1.02, 0.1])
 
 

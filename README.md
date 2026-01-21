@@ -10,6 +10,7 @@ _Overlay segmentation and tracking masks onto original image sequences for intui
 [![PyQt6](https://img.shields.io/badge/PyQt6-GUI-green.svg)](https://pypi.org/project/PyQt6/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Windows%2010%2F11-lightgrey.svg)]()
+[![Version](https://img.shields.io/badge/Version-1.1.0-brightgreen.svg)]()
 
 </div>
 
@@ -18,6 +19,7 @@ _Overlay segmentation and tracking masks onto original image sequences for intui
 ## 📋 Table of Contents
 
 - [Overview](#overview)
+- [What's New](#whats-new)
 - [Features](#features)
 - [System Requirements](#system-requirements)
 - [Installation](#installation)
@@ -30,6 +32,26 @@ _Overlay segmentation and tracking masks onto original image sequences for intui
 - [Troubleshooting](#troubleshooting)
 - [License](#license)
 - [Author](#author)
+
+---
+
+## What's New
+
+### Version 1.1.0 (2026-01-21)
+
+**New Features:**
+
+- **Enhanced Colorbar Customization**
+  - Border Thickness: Adjust the colorbar border line thickness (1-10 px)
+  - Tick Thickness: Customize tick mark line thickness (1-10 px)
+  - Tick Length: Control tick mark length from border (1-30 px)
+  - Provides finer control over colorbar appearance for publication-quality figures
+
+**Improvements:**
+
+- Improved colorbar rendering precision with configurable line properties
+- Enhanced UI parameter panel with new colorbar style controls
+- Better consistency between preview and exported results
 
 ---
 
@@ -302,15 +324,18 @@ The application window should appear if installation was successful.
 
 ### Colorbar (Velocity Mode)
 
-| Parameter     | Range/Options         | Default        | Description           |
-| ------------- | --------------------- | -------------- | --------------------- |
-| Enabled       | On/Off                | On             | Show/hide colorbar    |
-| Colormap      | viridis, plasma, etc. | viridis        | Color scheme          |
-| Height        | 50-2000 px            | 800 px         | Bar height            |
-| Width         | 5-200 px              | 40 px          | Bar width             |
-| Title         | Text                  | "Speed (μm/s)" | Colorbar title        |
-| Min/Max       | Numeric               | Auto           | Value range           |
-| Tick Interval | Numeric               | Auto           | Spacing between ticks |
+| Parameter       | Range/Options         | Default        | Description                  |
+| --------------- | --------------------- | -------------- | ---------------------------- |
+| Enabled         | On/Off                | On             | Show/hide colorbar           |
+| Colormap        | viridis, plasma, etc. | viridis        | Color scheme                 |
+| Height          | 50-2000 px            | 800 px         | Bar height                   |
+| Width           | 5-200 px              | 40 px          | Bar width                    |
+| Title           | Text                  | "Speed (μm/s)" | Colorbar title               |
+| Min/Max         | Numeric               | Auto           | Value range                  |
+| Tick Interval   | Numeric               | Auto           | Spacing between ticks        |
+| Border Thk      | 1-10 px               | 1 px           | Border line thickness        |
+| Tick Thk        | 1-10 px               | 1 px           | Tick mark line thickness     |
+| Tick Length     | 1-30 px               | 5 px           | Tick mark length from border |
 
 ---
 

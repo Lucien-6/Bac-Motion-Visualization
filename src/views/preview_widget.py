@@ -411,7 +411,10 @@ class PreviewWidget(QWidget):
         tick_font: str,
         tick_size: int,
         tick_bold: bool,
-        tick_color: str
+        tick_color: str,
+        border_thickness: int,
+        tick_thickness: int,
+        tick_length: int
     ):
         """Update colorbar appearance."""
         self._colorbar.set_bar_size(bar_width, bar_height)
@@ -426,6 +429,8 @@ class PreviewWidget(QWidget):
         )
         self._colorbar.set_title_color(title_color)
         self._colorbar.set_tick_color(tick_color)
+        self._colorbar.set_border_thickness(border_thickness)
+        self._colorbar.set_tick_style(tick_thickness, tick_length)
         
         # Store enabled state and apply visibility
         self._overlay_enabled_states['colorbar'] = visible

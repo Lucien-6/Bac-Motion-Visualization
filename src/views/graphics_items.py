@@ -397,6 +397,9 @@ class DraggableColorbar(DraggableItem):
         self._tick_font.setPixelSize(10)  # Use pixel size for DPI independence
         self._tick_bold = False
         self._tick_color = QColor(0, 0, 0)
+        self._border_thickness = 1
+        self._tick_thickness = 1
+        self._tick_length = 5
         
         self._update_total_size()
         
@@ -419,7 +422,7 @@ class DraggableColorbar(DraggableItem):
             bar_x = 5
             
             # Content (bar + ticks) width from left edge of bounding rect
-            content_width = bar_x + self._bar_width + 8 + max_tick_width + 10
+            content_width = bar_x + self._bar_width + self._tick_length + 3 + max_tick_width + 10
             
             # Title is centered at bar_x + bar_width/2
             # Calculate how much width the centered title needs
@@ -437,7 +440,7 @@ class DraggableColorbar(DraggableItem):
         else:
             # Title on right, vertical text
             title_height = title_fm.horizontalAdvance(self._title)
-            self._total_width = self._bar_width + 8 + max_tick_width + self._title_gap + title_fm.height() + 20
+            self._total_width = self._bar_width + self._tick_length + 3 + max_tick_width + self._title_gap + title_fm.height() + 20
             self._total_height = max(self._bar_height, title_height) + 20
         
         self.prepareGeometryChange()
@@ -509,6 +512,18 @@ class DraggableColorbar(DraggableItem):
         self._tick_color = COLOR_MAP.get(color, QColor(0, 0, 0))
         self.update()
     
+    def set_border_thickness(self, thickness: int):
+        """Set border line thickness."""
+        self._border_thickness = thickness
+        self.update()
+    
+    def set_tick_style(self, thickness: int, length: int):
+        """Set tick mark thickness and length."""
+        self._tick_thickness = thickness
+        self._tick_length = length
+        self._update_total_size()
+        self.update()
+    
     def boundingRect(self) -> QRectF:
         """Return bounding rectangle."""
         return QRectF(0, 0, self._total_width, self._total_height)
@@ -559,13 +574,13 @@ class DraggableColorbar(DraggableItem):
             painter.drawPixmap(bar_x, int(bar_y), scaled_pixmap)
         
         # Draw bar border
-        painter.setPen(QPen(self._tick_color, 1))
+        painter.setPen(QPen(self._tick_color, self._border_thickness))
         painter.setBrush(Qt.BrushStyle.NoBrush)
         painter.drawRect(bar_x, int(bar_y), self._bar_width, self._bar_height)
         
         # Draw tick marks and labels
         painter.setFont(self._tick_font)
-        painter.setPen(self._tick_color)
+        painter.setPen(QPen(self._tick_color, self._tick_thickness))
         if self._vmax > self._vmin and self._tick_interval > 0:
             num_ticks = int((self._vmax - self._vmin) / self._tick_interval) + 1
             
@@ -580,11 +595,11 @@ class DraggableColorbar(DraggableItem):
                 
                 painter.drawLine(
                     bar_x + self._bar_width, int(tick_y),
-                    bar_x + self._bar_width + 5, int(tick_y)
+                    bar_x + self._bar_width + self._tick_length, int(tick_y)
                 )
                 
                 painter.drawText(
-                    bar_x + self._bar_width + 8, int(tick_y) + tick_fm.ascent() // 2,
+                    bar_x + self._bar_width + self._tick_length + 3, int(tick_y) + tick_fm.ascent() // 2,
                     f"{value:.2f}"
                 )
         

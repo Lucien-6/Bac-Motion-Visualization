@@ -953,6 +953,51 @@ class ParameterPanel(QScrollArea):
         tick_color_layout.addStretch()
         layout.addLayout(tick_color_layout)
         
+        border_thickness_layout = QHBoxLayout()
+        border_thickness_layout.setSpacing(4)
+        border_thickness_label = QLabel("Border Thk:")
+        border_thickness_label.setFixedWidth(LABEL_WIDTH)
+        border_thickness_label.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        border_thickness_layout.addWidget(border_thickness_label)
+        self._colorbar_border_thickness_spin = QSpinBox()
+        self._colorbar_border_thickness_spin.setRange(1, 10)
+        self._colorbar_border_thickness_spin.setValue(1)
+        self._colorbar_border_thickness_spin.setSuffix(" px")
+        self._colorbar_border_thickness_spin.setMaximumWidth(INPUT_MAX_WIDTH)
+        border_thickness_layout.addWidget(self._colorbar_border_thickness_spin)
+        border_thickness_layout.addStretch()
+        layout.addLayout(border_thickness_layout)
+        
+        tick_thickness_layout = QHBoxLayout()
+        tick_thickness_layout.setSpacing(4)
+        tick_thickness_label = QLabel("Tick Thk:")
+        tick_thickness_label.setFixedWidth(LABEL_WIDTH)
+        tick_thickness_label.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        tick_thickness_layout.addWidget(tick_thickness_label)
+        self._colorbar_tick_thickness_spin = QSpinBox()
+        self._colorbar_tick_thickness_spin.setRange(1, 10)
+        self._colorbar_tick_thickness_spin.setValue(1)
+        self._colorbar_tick_thickness_spin.setSuffix(" px")
+        self._colorbar_tick_thickness_spin.setMaximumWidth(INPUT_MAX_WIDTH)
+        tick_thickness_layout.addWidget(self._colorbar_tick_thickness_spin)
+        tick_thickness_layout.addStretch()
+        layout.addLayout(tick_thickness_layout)
+        
+        tick_length_layout = QHBoxLayout()
+        tick_length_layout.setSpacing(4)
+        tick_length_label = QLabel("Tick Length:")
+        tick_length_label.setFixedWidth(LABEL_WIDTH)
+        tick_length_label.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        tick_length_layout.addWidget(tick_length_label)
+        self._colorbar_tick_length_spin = QSpinBox()
+        self._colorbar_tick_length_spin.setRange(1, 30)
+        self._colorbar_tick_length_spin.setValue(5)
+        self._colorbar_tick_length_spin.setSuffix(" px")
+        self._colorbar_tick_length_spin.setMaximumWidth(INPUT_MAX_WIDTH)
+        tick_length_layout.addWidget(self._colorbar_tick_length_spin)
+        tick_length_layout.addStretch()
+        layout.addLayout(tick_length_layout)
+        
         return group
     
     def _create_object_operations_group(self) -> QGroupBox:
@@ -995,6 +1040,8 @@ class ParameterPanel(QScrollArea):
             self._colorbar_height_spin, self._colorbar_width_spin, self._colorbar_title_gap_spin,
             self._colorbar_title_size_spin, self._colorbar_tick_size_spin,
             self._colorbar_min_spin, self._colorbar_max_spin, self._colorbar_tick_spin,
+            self._colorbar_border_thickness_spin, self._colorbar_tick_thickness_spin,
+            self._colorbar_tick_length_spin,
             self._output_fps_spin,
         ]
         
@@ -1135,6 +1182,9 @@ class ParameterPanel(QScrollArea):
         config.colorbar.tick_font_size = self._colorbar_tick_size_spin.value()
         config.colorbar.tick_font_bold = self._colorbar_tick_bold_check.isChecked()
         config.colorbar.tick_color = self._colorbar_tick_color_combo.currentText()
+        config.colorbar.border_thickness = self._colorbar_border_thickness_spin.value()
+        config.colorbar.tick_thickness = self._colorbar_tick_thickness_spin.value()
+        config.colorbar.tick_length = self._colorbar_tick_length_spin.value()
         
         return config
     
@@ -1235,6 +1285,9 @@ class ParameterPanel(QScrollArea):
             self._colorbar_tick_size_spin.setValue(config.colorbar.tick_font_size)
             self._colorbar_tick_bold_check.setChecked(config.colorbar.tick_font_bold)
             self._colorbar_tick_color_combo.setCurrentText(config.colorbar.tick_color)
+            self._colorbar_border_thickness_spin.setValue(config.colorbar.border_thickness)
+            self._colorbar_tick_thickness_spin.setValue(config.colorbar.tick_thickness)
+            self._colorbar_tick_length_spin.setValue(config.colorbar.tick_length)
             
         finally:
             self._updating = False

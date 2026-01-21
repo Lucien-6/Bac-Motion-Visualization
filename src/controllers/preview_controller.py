@@ -262,7 +262,10 @@ class PreviewController(QObject):
             cfg.colorbar.tick_font_family,
             cfg.colorbar.tick_font_size,
             cfg.colorbar.tick_font_bold,
-            cfg.colorbar.tick_color
+            cfg.colorbar.tick_color,
+            cfg.colorbar.border_thickness,
+            cfg.colorbar.tick_thickness,
+            cfg.colorbar.tick_length
         )
     
     def _update_playback_timer(self):

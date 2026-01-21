@@ -91,6 +91,9 @@
     "tick_font_size": 18,
     "tick_font_bold": true,
     "tick_color": "black",
+    "border_thickness": 1,
+    "tick_thickness": 1,
+    "tick_length": 5,
     "position": [
       1.02,
       0.1

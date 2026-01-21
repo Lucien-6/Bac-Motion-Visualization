@@ -849,7 +849,7 @@ class FrameRenderer:
             top = y
             
             # Calculate content width (bar + ticks)
-            content_width = bar_x_offset + bar_width + 8 + max_tick_width + 10
+            content_width = bar_x_offset + bar_width + cfg.tick_length + 3 + max_tick_width + 10
             
             # Calculate title width if present
             if cfg.title:
@@ -863,7 +863,7 @@ class FrameRenderer:
         else:
             left = x
             top = y
-            right = x + bar_x_offset + bar_width + 8 + max_tick_width + title_width + 10
+            right = x + bar_x_offset + bar_width + cfg.tick_length + 3 + max_tick_width + title_width + 10
             bottom = y + 5 + bar_height + 10
         
         return (left, top, right, bottom)
@@ -1287,7 +1287,7 @@ class FrameRenderer:
         # Draw border with antialiasing
         cv2.rectangle(
             result, (bar_x, bar_y), (bar_x + bar_width, bar_y + bar_height),
-            tick_color, 1, cv2.LINE_AA
+            tick_color, cfg.border_thickness, cv2.LINE_AA
         )
         
         # Draw title
@@ -1304,7 +1304,7 @@ class FrameRenderer:
                 # Title on right side - draw vertical text (rotated -90 degrees)
                 # Match editing mode: title_x base position + height offset for Qt translate
                 max_tick_width = qt_tick_fm.horizontalAdvance(f"{cfg.vmax:.2f}")
-                title_x_base = bar_x + bar_width + 8 + max_tick_width + cfg.title_gap
+                title_x_base = bar_x + bar_width + cfg.tick_length + 3 + max_tick_width + cfg.title_gap
                 # Qt translate uses title_x + font_height as anchor point
                 title_x = title_x_base + qt_title_fm.height()
                 title_y_center = bar_y + bar_height // 2
@@ -1329,15 +1329,15 @@ class FrameRenderer:
                 
                 # Draw tick line with antialiasing
                 cv2.line(
-                    result, (bar_x + bar_width, tick_y), (bar_x + bar_width + 5, tick_y),
-                    tick_color, 1, cv2.LINE_AA
+                    result, (bar_x + bar_width, tick_y), (bar_x + bar_width + cfg.tick_length, tick_y),
+                    tick_color, cfg.tick_thickness, cv2.LINE_AA
                 )
                 
                 # Draw tick label - match editing mode: tick_y + ascent() // 2
                 tick_text = f"{value:.2f}"
                 tick_label_y = tick_y + qt_tick_fm.ascent() // 2
                 result = self._draw_text_baseline_simple(
-                    result, tick_text, (bar_x + bar_width + 8, tick_label_y),
+                    result, tick_text, (bar_x + bar_width + cfg.tick_length + 3, tick_label_y),
                     cfg.tick_font_family, cfg.tick_font_size,
                     cfg.tick_font_bold, tick_color
                 )
